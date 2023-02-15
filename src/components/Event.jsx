@@ -1,39 +1,33 @@
-import React, { useState } from 'react';
-import {Select} from '@mui/material'
-import {MenuItem} from '@mui/material'
-import {FormControl} from '@mui/material';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
-// Original design here: https://github.com/siriwatknp/mui-treasury/issues/540
-
-const Event = () => {
-  const [val,setVal] = useState(1);
+export default function Event() {
+  const [event, setEvent] = React.useState('');
 
   const handleChange = (event) => {
-    setVal(event.target.value);
+    setEvent(event.target.value);
   };
 
-
-  
-
-  // moves the menu below the select input
-
-
   return (
-    <FormControl>
-      <Select
-        id='Event-Type'
-        name='Event'
-        value={val}
-        onChange={handleChange}
-      >
-        <MenuItem value={0}>All Category</MenuItem>
-        <MenuItem value={1}>Event Type</MenuItem>
-        <MenuItem value={2}>Photoshop</MenuItem>
-        <MenuItem value={3}>Framer</MenuItem>
-      </Select>
-    </FormControl>
+    <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Event</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={event}
+          label="Age"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
   );
-};
-
-
-export default Event;
+}

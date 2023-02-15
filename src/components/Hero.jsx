@@ -1,12 +1,20 @@
-import React from 'react'
-import {Typography, Card, Button, CardMedia, Grid, Toolbar, Container, AppBar, CardActions, CssBaseline, CardContent, CardHeader, IconButton} from '@mui/material'
+import React, { useState } from 'react'
+import {Typography, Card, CardMedia, Grid, Link, Toolbar, Container, AppBar, CardContent, Stack, Box, Button} from '@mui/material'
 import {PhotoCamera} from '@mui/icons-material'
 import TopBar from './TopBar'
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
 export const Hero = () => {
+
+    const [visible, setVisible] = useState(12)
+
+
+
+  const handleClick = () => {
+    setVisible(prev => prev + 3)
+  }
   return (
     <div>
         <AppBar position='relative'>
@@ -17,44 +25,34 @@ export const Hero = () => {
         </Typography>
       </Toolbar>
     </AppBar>
-    <TopBar/>
+    
     <main>
-      <div style={{margin:'10px'}}>
-        <Container maxWidth='sm'>
-          <Typography variant='h2' align='center' color='textPrimary' gutterBottom>Home page</Typography>
-          <div>
-            <Grid container spacing={2} justifyContent='center'>
-              <Grid item>
-                <Button variant='contained' color='primary'>See my photos</Button>
-              </Grid>
-              <Grid item>
-                <Button variant='outlined' color='secondary'>See my photos</Button>
-              </Grid>
-            </Grid>
-          </div>
-        </Container>
-      </div>
-      <Container maxWidth='md'>
-        <Grid container spacing={4}>
-            {cards.map(() => (
+      <Container maxWidth='lg'>
+      <TopBar/>
+        <Grid container spacing={4} marginTop="5px">
+            
+            {cards.slice(0, visible).map(() => (
+                
                 <Grid item xs={12} sm={6} md={4}>
+                    <Link href='event/eventId' style={{textDecoration:'none'}}>
                 <Card sx={{md:{width:'40px'}}}>
-                    <CardHeader action={<IconButton><MoreVertIcon/></IconButton>} title="Event bokking" subheader='September 15th'/>
-                  <CardMedia sx={{pt:'56.25%'}} image='https://source.unsplash.com/random' title='Image title'/>
+                  <CardMedia sx={{pt:'56.25%', height:140}} image='https://source.unsplash.com/random' title='Image title'/>
                   <CardContent sx={{flexGrow: 1}}>
-                    <Typography variant='h5' gutterBottom>Event Name</Typography>
-                    <Typography> This is a media card. You can use this section to describe the content.</Typography>
+                    <Stack direction='row'>
+                         <Box mr='7px'>date</Box>
+                         <Stack direction='column' >
+                            <Typography variant='h5' gutterBottom>Event Name</Typography>
+                            <Typography variant='body2'> This is a media card. You can use this section to describe the content.</Typography>
+                         </Stack>
+                    </Stack>
                   </CardContent>
-                  <CardActions>
-                    <Button size='small' color='primary'>View</Button>
-                    <Button size='small' color='primary'>Edit</Button>
-                  </CardActions>
                 </Card>
+                </Link>
               </Grid>
-            ))}
-          
+            ))} 
 
         </Grid>
+        <Button onClick={handleClick} variant='contained' style={{backgroundColor: 'orangered', height:'50px', marginTop:'40px', marginLeft:'470px', width:'180px', fontSize:'12px'}}> Load More Events </Button>
       </Container>
 
     </main>
